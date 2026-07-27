@@ -2,6 +2,8 @@
 
 **Supported Minecraft Versions:** `26.1` | `26.1.1` | `26.1.2` | `26.2`
 
+**Fabric version:** `0.19.3+`
+
 A Minecraft Fabric mod that adds a **Woodcutter** block — a wooden equivalent of the Stonecutter!
 
 ## Features
