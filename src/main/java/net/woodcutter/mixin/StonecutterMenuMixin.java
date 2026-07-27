@@ -10,14 +10,14 @@ import net.woodcutter.screen.WoodcutterMenu;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(StonecutterMenu.class)
 public class StonecutterMenuMixin {
 
-    @Inject(method = "setupRecipeList", at = @At("HEAD"), cancellable = true)
-    private void filterMenuRecipes(ItemStack item, CallbackInfo ci) {
+    @ModifyVariable(method = "setupRecipeList", at = @At("HEAD"), argsOnly = true)
+    private ItemStack filterMenuRecipes(ItemStack item) {
         boolean isWood = item.is(ItemTags.PLANKS) ||
                 item.is(ItemTags.LOGS) ||
                 item.is(Items.BAMBOO_BLOCK) ||
@@ -25,12 +25,14 @@ public class StonecutterMenuMixin {
                 item.is(Items.BAMBOO_MOSAIC);
 
         if (((Object) this).getClass() == StonecutterMenu.class && isWood) {
-            ci.cancel();
+            return ItemStack.EMPTY;
         }
 
-        if (((Object) this).getClass() == WoodcutterMenu.class && !isWood && !item.isEmpty()) {
-            ci.cancel();
+        if (((Object) this).getClass() == WoodcutterMenu.class && !isWood) {
+            return ItemStack.EMPTY;
         }
+
+        return item;
     }
 
     @Inject(method = "quickMoveStack", at = @At("HEAD"), cancellable = true)
