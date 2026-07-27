@@ -1,0 +1,8 @@
+{
+  "ui.woodcutter.take_result": {
+    "subtitle": "subtitles.the_woodcutter.woodcutter.take_result",
+    "sounds": [
+      "the_woodcutter:ui/woodcutter/take_result"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "net.woodcutter.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"StonecutterMenuMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "#minecraft:planks",
+    "I": "minecraft:iron_ingot",
+    "B": "#minecraft:logs"
+  },
+  "pattern": [
+    " I ",
+    "#B#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "the_woodcutter:woodcutter"
+  }
+}

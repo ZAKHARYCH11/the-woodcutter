@@ -1,0 +1,42 @@
+{
+	"schemaVersion": 1,
+	"id": "the_woodcutter",
+	"version": "${version}",
+	"name": "The Woodcutter",
+	"description": "Adds a Woodcutter block to quickly craft stairs, slabs, fences and other wooden items, similar to a stonecutter!",
+	"authors": [
+		"ZAKHARYCH"
+	],
+	"contact": {
+		"homepage": "https://github.com/ZAKHARYCH11/the-woodcutter",
+		"sources": "https://github.com/ZAKHARYCH11/the-woodcutter",
+		"issues": "https://github.com/ZAKHARYCH11/the-woodcutter/issues"
+	},
+	"license": "MIT",
+	"icon": "assets/the_woodcutter/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.woodcutter.Woodcutter"
+		],
+		"client": [
+			"net.woodcutter.client.WoodcutterClient"
+		],
+		"fabric-datagen": [
+			"net.woodcutter.data.WoodcutterDataGenerator"
+		]
+	},
+	"mixins": [
+		"the_woodcutter.mixins.json",
+		{
+			"config": "the_woodcutter.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.1",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
