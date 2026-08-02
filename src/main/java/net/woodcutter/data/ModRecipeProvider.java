@@ -33,16 +33,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         "acacia", "dark_oak", "mangrove", "cherry", "pale_oak"
                 );
 
-                // 1. Стандартные деревья
+                // Стандартные деревья
                 for (String wood : standardWoods) {
                     generateWoodRecipes(this.output, wood, false);
                 }
 
-                // 2. Незерская древесина
+                // Незерская древесина
                 generateWoodRecipes(this.output, "crimson", true);
                 generateWoodRecipes(this.output, "warped", true);
 
-                // 3. Бамбук
+                // Бамбук
                 generateBambooRecipes(this.output);
             }
 
@@ -61,6 +61,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 String buttonId = wood + "_button";
                 String trapdoorId = wood + "_trapdoor";
                 String doorId = wood + "_door";
+                String shelfId = wood + "_shelf";
+                String signId = wood + "_sign";
 
                 Item log = getItem(logId);
                 Item strippedLog = getItem(strippedLogId);
@@ -76,24 +78,29 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 Item button = getItem(buttonId);
                 Item trapdoor = getItem(trapdoorId);
                 Item door = getItem(doorId);
+                Item shelf = getItem(shelfId);
+                Item sign = getItem(signId);
 
-                // --- КРАФТЫ ИЗ ДОСОК (1 доска = 1 мелкий предмет / 2 полублока) ---
+                // Крафты из досок
                 addCut(output, planks, stairs, 1, wood + "_stairs_from_" + planksId);
                 addCut(output, planks, slab, 2, wood + "_slab_from_" + planksId);
                 addCut(output, planks, fence, 1, wood + "_fence_from_" + planksId);
                 addCut(output, planks, fenceGate, 1, wood + "_fence_gate_from_" + planksId);
                 addCut(output, planks, pressurePlate, 1, wood + "_pressure_plate_from_" + planksId);
                 addCut(output, planks, button, 1, wood + "_button_from_" + planksId);
-                // (Двери и Люки из 1 доски убраны для баланса)
 
                 // Отеска бревна и блока дерева
                 addCut(output, log, strippedLog, 1, strippedLogId + "_from_" + logId);
                 addCut(output, woodBlock, strippedWoodBlock, 1, strippedWoodBlockId + "_from_" + woodBlockId);
 
+                // Крафты полок
+                addCut(output, log, shelf, 1, shelfId + "_from_" + logId);
+                addCut(output, strippedLog, shelf, 1, shelfId + "_from_" + strippedLogId);
+
                 List<Item> fullWoodBlocks = List.of(log, strippedLog, woodBlock, strippedWoodBlock);
                 List<String> fullWoodIds = List.of(logId, strippedLogId, woodBlockId, strippedWoodBlockId);
 
-                // --- КРАФТЫ ИЗ БРЕВЕН И ДЕРЕВА (1 бревно = 4 доски = 2 Двери / 2 Люка) ---
+                // Крафты из бревен и древесины
                 for (int i = 0; i < fullWoodBlocks.size(); i++) {
                     Item source = fullWoodBlocks.get(i);
                     String sourceId = fullWoodIds.get(i);
@@ -105,8 +112,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                     addCut(output, source, fenceGate, 4, wood + "_fence_gate_from_" + sourceId);
                     addCut(output, source, pressurePlate, 4, wood + "_pressure_plate_from_" + sourceId);
                     addCut(output, source, button, 4, wood + "_button_from_" + sourceId);
+                    addCut(output, source, sign, 2, wood + "_sign_from_" + sourceId);
 
-                    // БАЛАНС: Из бревна получается 2 Двери и 2 Люка
                     addCut(output, source, trapdoor, 2, wood + "_trapdoor_from_" + sourceId);
                     addCut(output, source, door, 2, wood + "_door_from_" + sourceId);
                 }
@@ -125,15 +132,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 Item button = getItem("bamboo_button");
                 Item trapdoor = getItem("bamboo_trapdoor");
                 Item door = getItem("bamboo_door");
+                Item shelf = getItem("bamboo_shelf");
+                Item sign = getItem("bamboo_sign");
 
                 Item mosaic = getItem("bamboo_mosaic");
                 Item mosaicStairs = getItem("bamboo_mosaic_stairs");
                 Item mosaicSlab = getItem("bamboo_mosaic_slab");
 
-                // Отеска бамбукового блока
+                // Отеска блока бамбука
                 addCut(output, bambooBlock, strippedBambooBlock, 1, "stripped_bamboo_block_from_bamboo_block");
 
-                // Из бамбуковых досок
+                // Крафты из досок
                 addCut(output, bambooPlanks, stairs, 1, "bamboo_stairs_from_bamboo_planks");
                 addCut(output, bambooPlanks, slab, 2, "bamboo_slab_from_bamboo_planks");
                 addCut(output, bambooPlanks, fence, 1, "bamboo_fence_from_bamboo_planks");
@@ -144,10 +153,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 addCut(output, bambooPlanks, mosaicStairs, 1, "bamboo_mosaic_stairs_from_bamboo_planks");
                 addCut(output, bambooPlanks, mosaicSlab, 2, "bamboo_mosaic_slab_from_bamboo_planks");
 
-                // Из бамбуковых блоков (1 блок = 2 доски = 1 Дверь / 1 Люк)
+                // Крафты полок
+                addCut(output, bambooBlock, shelf, 1, "bamboo_shelf_from_bamboo_block");
+                addCut(output, strippedBambooBlock, shelf, 1, "bamboo_shelf_from_stripped_bamboo_block");
+
                 List<Item> bambooBlocks = List.of(bambooBlock, strippedBambooBlock);
                 List<String> bambooBlockIds = List.of("bamboo_block", "stripped_bamboo_block");
 
+                // Крафты из блоков бамбука
                 for (int i = 0; i < bambooBlocks.size(); i++) {
                     Item source = bambooBlocks.get(i);
                     String sourceId = bambooBlockIds.get(i);
@@ -159,8 +172,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                     addCut(output, source, fenceGate, 2, "bamboo_fence_gate_from_" + sourceId);
                     addCut(output, source, pressurePlate, 2, "bamboo_pressure_plate_from_" + sourceId);
                     addCut(output, source, button, 2, "bamboo_button_from_" + sourceId);
+                    addCut(output, source, sign, 1, "bamboo_sign_from_" + sourceId);
 
-                    // БАЛАНС ДЛЯ БАМБУКА: Из блока получается 1 Дверь и 1 Люк
                     addCut(output, source, trapdoor, 1, "bamboo_trapdoor_from_" + sourceId);
                     addCut(output, source, door, 1, "bamboo_door_from_" + sourceId);
 
