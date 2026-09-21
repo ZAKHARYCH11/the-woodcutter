@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:spruce_fence_gate_from_spruce_wood"
+        "recipes": "the_woodcutter:spruce_fence_gate_from_spruce_wood"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

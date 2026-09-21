@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:warped_pressure_plate_from_warped_planks"
+        "recipes": "the_woodcutter:warped_pressure_plate_from_warped_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:bamboo_mosaic_stairs_from_bamboo_block"
+        "recipes": "the_woodcutter:bamboo_mosaic_stairs_from_bamboo_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

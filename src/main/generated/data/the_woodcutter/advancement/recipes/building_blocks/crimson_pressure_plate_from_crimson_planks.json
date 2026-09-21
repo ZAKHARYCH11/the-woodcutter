@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:crimson_pressure_plate_from_crimson_planks"
+        "recipes": "the_woodcutter:crimson_pressure_plate_from_crimson_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

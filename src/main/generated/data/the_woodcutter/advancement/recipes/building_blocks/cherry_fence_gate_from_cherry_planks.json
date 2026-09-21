@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:cherry_fence_gate_from_cherry_planks"
+        "recipes": "the_woodcutter:cherry_fence_gate_from_cherry_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

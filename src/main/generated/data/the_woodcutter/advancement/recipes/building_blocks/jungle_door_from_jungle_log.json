@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:jungle_door_from_jungle_log"
+        "recipes": "the_woodcutter:jungle_door_from_jungle_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

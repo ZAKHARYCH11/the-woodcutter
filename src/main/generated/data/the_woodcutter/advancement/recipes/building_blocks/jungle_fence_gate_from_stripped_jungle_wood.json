@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:jungle_fence_gate_from_stripped_jungle_wood"
+        "recipes": "the_woodcutter:jungle_fence_gate_from_stripped_jungle_wood"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

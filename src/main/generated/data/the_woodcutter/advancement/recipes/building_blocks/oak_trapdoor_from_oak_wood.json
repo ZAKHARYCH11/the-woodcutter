@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:oak_trapdoor_from_oak_wood"
+        "recipes": "the_woodcutter:oak_trapdoor_from_oak_wood"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

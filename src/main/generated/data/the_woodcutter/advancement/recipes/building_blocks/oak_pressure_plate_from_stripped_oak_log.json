@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:oak_pressure_plate_from_stripped_oak_log"
+        "recipes": "the_woodcutter:oak_pressure_plate_from_stripped_oak_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

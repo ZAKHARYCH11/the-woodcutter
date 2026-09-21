@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:jungle_fence_from_jungle_planks"
+        "recipes": "the_woodcutter:jungle_fence_from_jungle_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

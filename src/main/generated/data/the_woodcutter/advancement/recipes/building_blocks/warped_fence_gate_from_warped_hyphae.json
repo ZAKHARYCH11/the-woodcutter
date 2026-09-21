@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:warped_fence_gate_from_warped_hyphae"
+        "recipes": "the_woodcutter:warped_fence_gate_from_warped_hyphae"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

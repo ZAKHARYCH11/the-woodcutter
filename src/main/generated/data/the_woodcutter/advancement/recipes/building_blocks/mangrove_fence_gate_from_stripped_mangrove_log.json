@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:mangrove_fence_gate_from_stripped_mangrove_log"
+        "recipes": "the_woodcutter:mangrove_fence_gate_from_stripped_mangrove_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

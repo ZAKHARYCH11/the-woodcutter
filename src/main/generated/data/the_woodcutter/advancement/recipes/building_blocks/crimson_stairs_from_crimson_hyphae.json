@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:crimson_stairs_from_crimson_hyphae"
+        "recipes": "the_woodcutter:crimson_stairs_from_crimson_hyphae"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

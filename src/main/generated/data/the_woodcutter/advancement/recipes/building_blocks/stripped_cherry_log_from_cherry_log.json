@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:stripped_cherry_log_from_cherry_log"
+        "recipes": "the_woodcutter:stripped_cherry_log_from_cherry_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -2,6 +2,7 @@ package net.woodcutter.data;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.triggers.InventoryChangeTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -9,9 +10,11 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.woodcutter.Woodcutter;
 
 import java.util.List;
@@ -24,13 +27,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     }
 
     @Override
-    protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
-        return new RecipeProvider(provider, recipeOutput) {
+    protected RecipeProvider createRecipeProvider(
+            HolderLookup.Provider registries,
+            BootstrapContext<Recipe<?>> recipes,
+            BootstrapContext<Advancement> advancements
+    )  {
+        return new RecipeProvider(recipes, advancements) {
             @Override
             public void buildRecipes() {
                 List<String> standardWoods = List.of(
                         "oak", "spruce", "birch", "jungle",
-                        "acacia", "dark_oak", "mangrove", "cherry", "pale_oak"
+                        "acacia", "dark_oak", "mangrove", "cherry", "pale_oak", "poplar"
                 );
 
                 // Стандартные деревья

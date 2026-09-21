@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:acacia_stairs_from_acacia_planks"
+        "recipes": "the_woodcutter:acacia_stairs_from_acacia_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

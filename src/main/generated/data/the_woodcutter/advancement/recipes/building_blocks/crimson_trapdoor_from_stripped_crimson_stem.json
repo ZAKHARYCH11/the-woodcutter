@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:crimson_trapdoor_from_stripped_crimson_stem"
+        "recipes": "the_woodcutter:crimson_trapdoor_from_stripped_crimson_stem"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

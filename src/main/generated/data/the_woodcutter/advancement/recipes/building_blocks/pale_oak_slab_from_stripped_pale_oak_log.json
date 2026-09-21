@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:pale_oak_slab_from_stripped_pale_oak_log"
+        "recipes": "the_woodcutter:pale_oak_slab_from_stripped_pale_oak_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

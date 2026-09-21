@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:bamboo_button_from_bamboo_planks"
+        "recipes": "the_woodcutter:bamboo_button_from_bamboo_planks"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

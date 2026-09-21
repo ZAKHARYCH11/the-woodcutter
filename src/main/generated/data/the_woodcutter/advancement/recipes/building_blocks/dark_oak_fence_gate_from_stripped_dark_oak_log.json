@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:dark_oak_fence_gate_from_stripped_dark_oak_log"
+        "recipes": "the_woodcutter:dark_oak_fence_gate_from_stripped_dark_oak_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

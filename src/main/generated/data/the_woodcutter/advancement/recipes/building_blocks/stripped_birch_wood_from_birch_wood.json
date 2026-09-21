@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:stripped_birch_wood_from_birch_wood"
+        "recipes": "the_woodcutter:stripped_birch_wood_from_birch_wood"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

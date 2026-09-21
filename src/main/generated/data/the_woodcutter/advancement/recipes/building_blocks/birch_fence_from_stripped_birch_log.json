@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "the_woodcutter:birch_fence_from_stripped_birch_log"
+        "recipes": "the_woodcutter:birch_fence_from_stripped_birch_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
