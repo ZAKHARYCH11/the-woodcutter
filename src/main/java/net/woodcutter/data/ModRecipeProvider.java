@@ -51,6 +51,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
                 // Бамбук
                 generateBambooRecipes(this.output);
+
+                // Предметы без привязки к типу дерева
+
             }
 
             private void generateWoodRecipes(RecipeOutput output, String wood, boolean isNether) {
@@ -71,6 +74,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 String shelfId = wood + "_shelf";
                 String signId = wood + "_sign";
 
+                String craftingTableId = "crafting_table";
+                String stickId = "stick";
+                String bowlId = "bowl";
+                String ladderId = "ladder";
+
                 Item log = getItem(logId);
                 Item strippedLog = getItem(strippedLogId);
                 Item woodBlock = getItem(woodBlockId);
@@ -88,6 +96,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 Item shelf = getItem(shelfId);
                 Item sign = getItem(signId);
 
+                Item boat = null;
+                if(!isNether){
+                    String boatId = wood + "_boat";
+                    boat = getItem(boatId);
+                }
+
+                Item craftingTable = getItem(craftingTableId);
+                Item stick = getItem(stickId);
+                Item bowl = getItem(bowlId);
+                Item ladder = getItem(ladderId);
+
                 // Крафты из досок
                 addCut(output, planks, stairs, 1, wood + "_stairs_from_" + planksId);
                 addCut(output, planks, slab, 2, wood + "_slab_from_" + planksId);
@@ -95,6 +114,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 addCut(output, planks, fenceGate, 1, wood + "_fence_gate_from_" + planksId);
                 addCut(output, planks, pressurePlate, 1, wood + "_pressure_plate_from_" + planksId);
                 addCut(output, planks, button, 1, wood + "_button_from_" + planksId);
+                addCut(output, planks, stick, 2, "stick_from_" + planksId);
+                addCut(output, planks, bowl, 2, "bowl_from_" + planksId);
+                addCut(output, planks, ladder, 1, "ladder_from_" + planksId);
 
                 // Отеска бревна и блока дерева
                 addCut(output, log, strippedLog, 1, strippedLogId + "_from_" + logId);
@@ -123,6 +145,15 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
                     addCut(output, source, trapdoor, 2, wood + "_trapdoor_from_" + sourceId);
                     addCut(output, source, door, 2, wood + "_door_from_" + sourceId);
+
+                    addCut(output, source, stick, 8, "stick_from_" + sourceId);
+                    addCut(output, source, bowl, 8, "bowl_from_" + sourceId);
+                    addCut(output, source, craftingTable, 1, "crafting_table_from_" + sourceId);
+                    addCut(output, source, ladder, 4, "ladder_from_" + sourceId);
+
+                    if(boat != null){
+                        addCut(output, source, boat, 1, wood + "_boat_from_" + sourceId);
+                    }
                 }
             }
 
@@ -142,6 +173,10 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 Item shelf = getItem("bamboo_shelf");
                 Item sign = getItem("bamboo_sign");
 
+                Item stick = getItem("stick");
+                Item bowl = getItem("bowl");
+                Item ladder = getItem("ladder");
+
                 Item mosaic = getItem("bamboo_mosaic");
                 Item mosaicStairs = getItem("bamboo_mosaic_stairs");
                 Item mosaicSlab = getItem("bamboo_mosaic_slab");
@@ -159,6 +194,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 addCut(output, bambooPlanks, mosaic, 1, "bamboo_mosaic_from_bamboo_planks");
                 addCut(output, bambooPlanks, mosaicStairs, 1, "bamboo_mosaic_stairs_from_bamboo_planks");
                 addCut(output, bambooPlanks, mosaicSlab, 2, "bamboo_mosaic_slab_from_bamboo_planks");
+                addCut(output, bambooPlanks, stick, 2, "stick_from_bamboo_planks");
+                addCut(output, bambooPlanks, bowl, 2, "bowl_from_bambo_planks");
+                addCut(output, bambooPlanks, ladder, 1, "ladder_from_bamboo_planks");
 
                 // Крафты полок
                 addCut(output, bambooBlock, shelf, 1, "bamboo_shelf_from_bamboo_block");
@@ -187,11 +225,19 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                     addCut(output, source, mosaic, 2, "bamboo_mosaic_from_" + sourceId);
                     addCut(output, source, mosaicStairs, 2, "bamboo_mosaic_stairs_from_" + sourceId);
                     addCut(output, source, mosaicSlab, 4, "bamboo_mosaic_slab_from_" + sourceId);
+
+                    addCut(output, source, stick, 4, "stick_from_" + sourceId);
+                    addCut(output, source, bowl, 4, "bowl_from_" + sourceId);
+                    addCut(output, source, ladder, 2, "ladder_from_" + sourceId);
                 }
             }
 
             private Item getItem(String id) {
-                return BuiltInRegistries.ITEM.get(Identifier.fromNamespaceAndPath("minecraft", id)).orElseThrow().value();
+                var holder = BuiltInRegistries.ITEM.get(Identifier.fromNamespaceAndPath("minecraft", id));
+                if (holder.isEmpty()) {
+                    throw new IllegalArgumentException("Ошибка: предмет minecraft:" + id + " не существует в игре!");
+                }
+                return holder.get().value();
             }
 
             private void addCut(RecipeOutput output, Item input, Item result, int count, String recipeName) {
