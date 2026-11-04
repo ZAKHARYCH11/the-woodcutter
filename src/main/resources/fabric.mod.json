@@ -24,6 +24,9 @@
 		],
 		"fabric-datagen": [
 			"net.woodcutter.data.WoodcutterDataGenerator"
+		],
+		"emi": [
+			"net.woodcutter.client.compat.emi.WoodcutterEmiPlugin"
 		]
 	},
 	"mixins": [
@@ -38,5 +41,8 @@
 		"minecraft": "~26.3",
 		"java": ">=25",
 		"fabric-api": "*"
+	},
+	"suggests": {
+		"emi": "*"
 	}
 }

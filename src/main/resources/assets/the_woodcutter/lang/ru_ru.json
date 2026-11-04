@@ -1,5 +1,6 @@
 {
   "item.the_woodcutter.woodcutter": "Нарезчик дерева",
   "container.the_woodcutter.woodcutter": "Нарезчик дерева",
-  "subtitles.the_woodcutter.woodcutter.take_result": "Нарезчик дерева работает"
+  "subtitles.the_woodcutter.woodcutter.take_result": "Нарезчик дерева работает",
+  "emi.category.the_woodcutter.woodcutting": "Резьба по дереву"
 }

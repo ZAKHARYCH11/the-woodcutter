@@ -10,5 +10,6 @@ public class WoodcutterClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		MenuScreens.register(ModMenuTypes.WOODCUTTER_MENU, WoodcutterScreen::new);
+		ClientTasks.init();
 	}
 }

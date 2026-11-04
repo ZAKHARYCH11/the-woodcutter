@@ -51,9 +51,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
                 // Бамбук
                 generateBambooRecipes(this.output);
-
-                // Предметы без привязки к типу дерева
-
             }
 
             private void generateWoodRecipes(RecipeOutput output, String wood, boolean isNether) {
