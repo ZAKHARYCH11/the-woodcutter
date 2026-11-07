@@ -97,7 +97,6 @@ public class WoodcutterEmiPlugin implements EmiPlugin {
 
             @Override
             public boolean craft(EmiRecipe recipe, EmiCraftContext<WoodcutterMenu> context) {
-                System.out.println("amount=" + context.getAmount() + " dest=" + context.getDestination() + " type=" + context.getType());
                 WoodcutterMenu menu = context.getScreenHandler();
                 boolean success = StandardRecipeHandler.super.craft(recipe, context);
 
