@@ -4,7 +4,6 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
-import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.transfer.IRecipeTransferError;
 import mezz.jei.api.recipe.transfer.IRecipeTransferHandler;
 import mezz.jei.api.recipe.transfer.IRecipeTransferHandlerHelper;
@@ -137,6 +136,12 @@ public class WoodcutterJeiPlugin implements IModPlugin {
                             return true;
                         }
 
+                        ItemStack currentInput = container.slots.get(0).getItem();
+
+                        if (!recipe.value().input().test(currentInput)) {
+                            return --ticksLeft[0] <= 0;
+                        }
+
                         if (container.hasInputItem()) {
                             var entries = container.getVisibleRecipes().entries();
                             ContextMap ctx = SlotDisplayContext.fromLevel(mc.level);
@@ -144,7 +149,6 @@ public class WoodcutterJeiPlugin implements IModPlugin {
                             for (int i = 0; i < entries.size(); i++) {
                                 ItemStack result = entries.get(i).recipe().optionDisplay().resolveForFirstStack(ctx);
                                 if (ItemStack.isSameItemSameComponents(result, targetOutput)) {
-                                    container.clickMenuButton(mc.player, i);
                                     mc.gameMode.handleInventoryButtonClick(container.containerId, i);
                                     return true;
                                 }

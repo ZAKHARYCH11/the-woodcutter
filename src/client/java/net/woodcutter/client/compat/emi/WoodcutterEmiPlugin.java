@@ -12,20 +12,17 @@ import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.client.Minecraft;
-import net.minecraft.util.context.ContextMap;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.context.ContextMap;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
-import net.minecraft.world.item.crafting.StonecutterRecipe;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.display.SlotDisplayContext;
 import net.woodcutter.Woodcutter;
 import net.woodcutter.block.ModBlocks;
+import net.woodcutter.client.ClientTasks;
 import net.woodcutter.screen.ModMenuTypes;
 import net.woodcutter.screen.WoodcutterMenu;
-import net.woodcutter.client.ClientTasks;
 
 import java.util.List;
 
@@ -60,7 +57,7 @@ public class WoodcutterEmiPlugin implements EmiPlugin {
                 return recipe.getCategory() == WOODCUTTING_CATEGORY;
             }
 
-            private static void selectRecipe(WoodcutterMenu menu, ItemStack target) {
+            private static void selectRecipe(WoodcutterMenu menu, Ingredient expectedIngredient, ItemStack target) {
                 Minecraft mc = Minecraft.getInstance();
                 int[] ticksLeft = {20};
 
@@ -70,34 +67,43 @@ public class WoodcutterEmiPlugin implements EmiPlugin {
                         return true;
                     }
 
-                    if (menu.hasInputItem()) {
-                        var entries = menu.getVisibleRecipes().entries();
-                        ContextMap ctx = SlotDisplayContext.fromLevel(mc.level);
+                    if (!expectedIngredient.test(menu.slots.get(0).getItem()) || !menu.hasInputItem()) {
+                        return --ticksLeft[0] <= 0;
+                    }
 
-                        for (int i = 0; i < entries.size(); i++) {
-                            ItemStack result = entries.get(i).recipe().optionDisplay().resolveForFirstStack(ctx);
-                            if (ItemStack.isSameItemSameComponents(result, target)) {
-                                menu.clickMenuButton(mc.player, i);
-                                mc.gameMode.handleInventoryButtonClick(menu.containerId, i);
-                                return true;
-                            }
+                    var entries = menu.getVisibleRecipes().entries();
+                    ContextMap ctx = SlotDisplayContext.fromLevel(mc.level);
+
+                    int targetIndex = -1;
+                    for (int i = 0; i < entries.size(); i++) {
+                        ItemStack result = entries.get(i).recipe().optionDisplay().resolveForFirstStack(ctx);
+                        if (ItemStack.isSameItemSameComponents(result, target)) {
+                            targetIndex = i;
+                            break;
                         }
                     }
-                    return --ticksLeft[0] <= 0;
+                    if (targetIndex < 0) {
+                        return --ticksLeft[0] <= 0;
+                    }
+
+                    if (entries.size() > 1) {
+                        int other = targetIndex == 0 ? 1 : 0;
+                        mc.gameMode.handleInventoryButtonClick(menu.containerId, other);
+                    }
+                    mc.gameMode.handleInventoryButtonClick(menu.containerId, targetIndex);
+                    return true;
                 });
             }
 
             @Override
             public boolean craft(EmiRecipe recipe, EmiCraftContext<WoodcutterMenu> context) {
+                System.out.println("amount=" + context.getAmount() + " dest=" + context.getDestination() + " type=" + context.getType());
+                WoodcutterMenu menu = context.getScreenHandler();
                 boolean success = StandardRecipeHandler.super.craft(recipe, context);
 
-                if (recipe instanceof WoodcutterEmiRecipe woodcutterRecipe) {
-                    WoodcutterMenu menu = context.getScreenHandler();
-                    if (menu != null) {
-                        selectRecipe(menu, woodcutterRecipe.getOutputs().get(0).getItemStack());
-                    }
+                if (success && menu != null && recipe instanceof WoodcutterEmiRecipe r) {
+                    selectRecipe(menu, r.getRawIngredient(), r.getOutputs().get(0).getItemStack());
                 }
-
                 return success;
             }
         });
@@ -120,13 +126,19 @@ public class WoodcutterEmiPlugin implements EmiPlugin {
 
     public static class WoodcutterEmiRecipe implements EmiRecipe {
         private final Identifier id;
+        private final Ingredient rawIngredient;
         private final EmiIngredient input;
         private final EmiStack output;
 
         public WoodcutterEmiRecipe(Identifier id, StonecutterRecipe recipe) {
             this.id = id;
+            this.rawIngredient = recipe.input();
             this.input = EmiIngredient.of(recipe.input());
             this.output = EmiStack.of(recipe.assemble(new SingleRecipeInput(ItemStack.EMPTY)));
+        }
+
+        public Ingredient getRawIngredient() {
+            return rawIngredient;
         }
 
         @Override
