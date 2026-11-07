@@ -11,6 +11,11 @@ repositories {
 		name = "TerraformersMC"
 		url = "https://maven.terraformersmc.com/"
 	}
+
+	maven {
+		name = "Jared's maven"
+		url = "https://maven.blamejared.com/"
+	}
 }
 
 loom {
@@ -34,6 +39,9 @@ dependencies {
 
 	compileOnly files("libs/1.1+26.3+fabric.jar")
 	// localRuntime files("libs/1.1+26.3+fabric.jar")
+
+	compileOnly("mezz.jei:jei-26.3-fabric-api:31.7.0.40")
+	// runtimeOnly("mezz.jei:jei-26.3-fabric:31.7.0.40")
 }
 
 processResources {

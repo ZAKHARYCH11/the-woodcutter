@@ -16,6 +16,6 @@ A Minecraft Fabric mod that adds a **Woodcutter** block — a wooden equivalent 
 ![img.png](crafting_recipe.png)
 
 ### Mod Compatibility
-- **EMI:** Fully supported! Adds a dedicated **"Woodcutting"** recipe tab with compact UI.
+- **JEI and EMI:** Adds a dedicated **"Woodcutting"** recipe tab with compact UI.
 
 To build this project from source, download the EMI jar for Minecraft 26.3 and place it in the /libs folder.

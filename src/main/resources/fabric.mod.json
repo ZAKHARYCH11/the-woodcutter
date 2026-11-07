@@ -27,6 +27,9 @@
 		],
 		"emi": [
 			"net.woodcutter.client.compat.emi.WoodcutterEmiPlugin"
+		],
+		"jei_mod_plugin": [
+			"net.woodcutter.client.compat.jei.WoodcutterJeiPlugin"
 		]
 	},
 	"mixins": [
@@ -43,6 +46,7 @@
 		"fabric-api": "*"
 	},
 	"suggests": {
-		"emi": "*"
+		"emi": "*",
+		"jei": "*"
 	}
 }
